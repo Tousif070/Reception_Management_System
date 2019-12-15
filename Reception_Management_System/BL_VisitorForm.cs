@@ -149,7 +149,7 @@ namespace Reception_Management_System
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, this.ToString() + " Insert Professional Data Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, this.ToString() + " InsertProfessionalData Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 return "exception";
             }
         }
@@ -172,7 +172,7 @@ namespace Reception_Management_System
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, this.ToString() + " Insert Family Data Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, this.ToString() + " InsertFamilyData Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 return "exception";
             }
         }

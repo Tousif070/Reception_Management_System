@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reception_Management_System"
         mc:Ignorable="d"
         Title="Dashboard_Receptionist" Height="830" Width="1300" WindowStartupLocation="CenterScreen">
-    <Grid Background="#AADFFF">
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -45,7 +45,7 @@
 
 
 
-        <StackPanel x:Name="FormPanel" Visibility="Visible" Grid.Column="1" Grid.Row="1" >
+        <StackPanel x:Name="FormPanel" Visibility="Visible" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
             <TextBlock Text="Visitor's Form" Margin="0,0,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
             <TextBlock x:Name="FormAlert" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="20" FontFamily="Helvetica" Foreground="Red" Visibility="Collapsed" />
@@ -86,8 +86,8 @@
 
 
 
-        
-        
+
+
         <StackPanel x:Name="ShowInfoPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
             <TextBlock x:Name="Heading" Margin="0 20 0 0" HorizontalAlignment="Center" Text="Data Recorded Successfully" FontSize="35" FontFamily="Canadara" FontWeight="SemiBold" Foreground="#1EAB08"/>
@@ -98,9 +98,9 @@
             <TextBlock   x:Name="relationship" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
             <TextBlock   x:Name="Purpose" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica"/>
             <TextBlock   x:Name="Occupation" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
-            <TextBlock   x:Name="contact" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
             <TextBlock   x:Name="Company" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica"/>
             <TextBlock   x:Name="email" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
+            <TextBlock   x:Name="contact" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
             <TextBlock   x:Name="dates" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
             <TextBlock   x:Name="times" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
 
@@ -110,31 +110,33 @@
 
 
 
-        <StackPanel x:Name="SearchvisitorPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background='#AADFFF' >
+        <StackPanel x:Name="SearchvisitorPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
             <TextBlock Text="Search Visitors" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
 
+            <TextBlock x:Name="AlertVisitorSearch" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="24" FontFamily="Helvetica" Foreground="Crimson" Visibility="Collapsed" />
+
             <WrapPanel Margin="40,30,0,0">
                 <TextBlock Text="Visitor Name:" Margin="50,0,0,0" FontSize="24" FontFamily="Helvetica" />
-                <TextBox Width="500" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" />
+                <TextBox x:Name="TbxVisitorSearch" Width="500" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" />
 
-                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica">
+                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" Click="Button_SearchByName">
                     <Image Source="D:\C#\Reception_Management_System\Images\mag1.png" Height="35" Width="35" />
                 </Button>
             </WrapPanel>
 
             <WrapPanel Margin="90,100,0,0">
                 <TextBlock Text="Date: " Margin="0,0,10,0" FontSize="24" FontFamily="Helvetica" />
-                <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                <ComboBox x:Name="CBDate" FontSize="24" FontFamily="Helvetica">
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
@@ -158,27 +160,27 @@
                     <ComboBoxItem Content="30" />
                     <ComboBoxItem Content="31" />
                 </ComboBox>
-                <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                <ComboBox x:Name="CBMonth" FontSize="24" FontFamily="Helvetica">
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
                 </ComboBox>
-                <ComboBox FontSize="24" FontFamily="Helvetica">
+                <ComboBox x:Name="CBYear" FontSize="24" FontFamily="Helvetica">
                     <ComboBoxItem IsSelected="True" Content="2019" />
                     <ComboBoxItem Content="2020" />
                 </ComboBox>
 
                 <TextBlock Text="From: " Margin="70,0,10,0" FontSize="24" FontFamily="Helvetica" />
-                <ComboBox FontSize="24" FontFamily="Helvetica">
+                <ComboBox x:Name="CBTime1" FontSize="24" FontFamily="Helvetica">
                     <ComboBoxItem IsSelected="True" Content="08:00:00" />
                     <ComboBoxItem Content="09:00:00" />
                     <ComboBoxItem Content="10:00:00" />
@@ -196,12 +198,12 @@
                 </ComboBox>
                 
                 <TextBlock Text="To: " Margin="20,0,10,0" FontSize="24" FontFamily="Helvetica" />
-                <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="08:00:00" />
+                <ComboBox x:Name="CBTime2" FontSize="24" FontFamily="Helvetica">
+                    <ComboBoxItem Content="08:00:00" />
                     <ComboBoxItem Content="09:00:00" />
                     <ComboBoxItem Content="10:00:00" />
                     <ComboBoxItem Content="11:00:00" />
-                    <ComboBoxItem Content="12:00:00" />
+                    <ComboBoxItem IsSelected="True" Content="12:00:00" />
                     <ComboBoxItem Content="13:00:00" />
                     <ComboBoxItem Content="14:00:00" />
                     <ComboBoxItem Content="15:00:00" />
@@ -213,7 +215,7 @@
                     <ComboBoxItem Content="21:00:00" />
                 </ComboBox>
 
-                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica">
+                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" Click="Button_SearchByDate">
                     <Image Source="D:\C#\Reception_Management_System\Images\mag1.png" Height="35" Width="35" />
                 </Button>
             </WrapPanel>
@@ -221,15 +223,15 @@
             <WrapPanel Margin="90,100,0,0">
                 <TextBlock Text="From: " Margin="0,0,10,0" FontSize="24" FontFamily="Helvetica" />
                 <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
@@ -254,15 +256,15 @@
                     <ComboBoxItem Content="31" />
                 </ComboBox>
                 <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
@@ -274,15 +276,15 @@
 
                 <TextBlock Text="To: " Margin="50,0,10,0" FontSize="24" FontFamily="Helvetica" />
                 <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
@@ -307,15 +309,15 @@
                     <ComboBoxItem Content="31" />
                 </ComboBox>
                 <ComboBox FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="1" />
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4" />
-                    <ComboBoxItem Content="5" />
-                    <ComboBoxItem Content="6" />
-                    <ComboBoxItem Content="7" />
-                    <ComboBoxItem Content="8" />
-                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="02" />
+                    <ComboBoxItem Content="03" />
+                    <ComboBoxItem Content="04" />
+                    <ComboBoxItem Content="05" />
+                    <ComboBoxItem Content="06" />
+                    <ComboBoxItem Content="07" />
+                    <ComboBoxItem Content="08" />
+                    <ComboBoxItem Content="09" />
                     <ComboBoxItem Content="10" />
                     <ComboBoxItem Content="11" />
                     <ComboBoxItem Content="12" />
@@ -333,10 +335,10 @@
         </StackPanel>
 
 
-        
-        
 
-        <StackPanel  x:Name="EmployeePanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" >
+
+
+        <StackPanel  x:Name="EmployeePanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
             <TextBlock Text="Search Employee" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
 
@@ -349,6 +351,81 @@
                 </Button>
             </WrapPanel>
 
+        </StackPanel>
+
+
+
+        <StackPanel x:Name="ReceptionistTablePanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
+            <TextBlock Text="Table Results" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="24" FontFamily="Helvetica" />
+
+            <Button Content="Go Back" Margin="880,-60,0,0" Height="22" Width="65" FontSize="14" FontFamily="helvetica" Background="#E6E6FA" Click="Button_Back_ReceptionistTablePanel" />
+
+            <TextBlock x:Name="AlertReceptionistTablePanel" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontFamily="helevtica" Foreground="Crimson" />
+
+            <DataGrid x:Name="ReceptionistVisitorDG" IsReadOnly="true" Width="950" Margin="0,20,0,0" AutoGenerateColumns="False" FontSize="16" FontFamily="helvetica" Visibility="Collapsed">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Visiting Time" Binding="{Binding VisitingTime}" />
+
+                    <DataGridTemplateColumn Header="Visitor ID">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding VisitorID}" Height="30" Width="40" Click="ReceptionistSeeMoreInfo" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Visitor Name" Binding="{Binding VisitorName}" />
+                    <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeID}" />
+                    <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" />
+                    <DataGridTextColumn Header="Relationship" Binding="{Binding Relationship}" />
+                    <DataGridTextColumn Header="Purpose" Binding="{Binding Purpose}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </StackPanel>
+
+
+
+        <StackPanel x:Name="ReceptionistVisitorInfoPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
+            <TextBlock Text="Full Information" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontFamily="helvetica" />
+
+            <Label Content="ID:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx1" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Name:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx2" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Gender:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx3" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Meeting With:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx4" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Relationship:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx5" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Purpose:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx6" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Occupation:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx7" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Office Name:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx8" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Email ID:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx9" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Contact Number:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx10" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+            
+            <Label Content="Visiting Date:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx11" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+
+            <Label Content="Visiting Time:" Margin="70,10,0,0" FontSize="16" FontFamily="helvetica" />
+            <TextBox x:Name="RFITbx12" Margin="120,-30,0,0" TextWrapping="Wrap" IsReadOnly="True" Height="28" Width="700" FontSize="16" FontFamily="helvetica" />
+
+            <Button Content="Go Back" Margin="880,-970,0,0" Height="22" Width="65" FontSize="14" FontFamily="helvetica" Background="#E6E6FA" Click="Button_Back_ReceptionistVisitorInfoPanel" />
         </StackPanel>
 
 

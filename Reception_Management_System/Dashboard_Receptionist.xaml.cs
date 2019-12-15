@@ -20,6 +20,7 @@ namespace Reception_Management_System
     public partial class Dashboard_Receptionist : Window
     {
         private BL_VisitorForm fm = new BL_VisitorForm();
+        private BL_Tables BLT = new BL_Tables();
         private MainWindow MainWindow = null;
 
         public Dashboard_Receptionist()
@@ -33,7 +34,140 @@ namespace Reception_Management_System
         {
             MainWindow = inputMainWindow;
         }
-        
+
+        private void Button_SearchByName(object sender, RoutedEventArgs ex)
+        {
+            List<VisitorEmployeeView> visitorEmployeeViewList = new List<VisitorEmployeeView>();
+            VisitorEmployeeView visitorEmployeeView = new VisitorEmployeeView();
+            visitorEmployeeView.VisitorName = TbxVisitorSearch.Text;
+
+            if(!visitorEmployeeView.VisitorName.Equals(""))
+            {
+                visitorEmployeeViewList = BLT.searchVisitorByName(visitorEmployeeView.VisitorName);
+
+                if(visitorEmployeeViewList != null)
+                {
+                    if(visitorEmployeeViewList.Count != 0)
+                    {
+                        AlertVisitorSearch.Visibility = Visibility.Collapsed;
+
+                        ReceptionistVisitorDG.ItemsSource = visitorEmployeeViewList;
+                        ReceptionistTablePanel.Visibility = Visibility.Visible;
+                        ReceptionistVisitorDG.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        AlertVisitorSearch.Text = "No Results Found";
+                        AlertVisitorSearch.Visibility = Visibility.Visible;
+                        ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                        ReceptionistVisitorDG.Visibility = Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    AlertVisitorSearch.Text = "Connection Error! Please Try Again Later";
+                    AlertVisitorSearch.Visibility = Visibility.Visible;
+                    ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                    ReceptionistVisitorDG.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                AlertVisitorSearch.Text = "The Search Field Is Empty";
+                AlertVisitorSearch.Visibility = Visibility.Visible;
+                ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                ReceptionistVisitorDG.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Button_SearchByDate(object sender, RoutedEventArgs ex)
+        {
+            string date = CBYear.Text + "-" + CBMonth.Text + "-" + CBDate.Text;
+            string time1 = date + " " + CBTime1.Text;
+            string time2 = date + " " + CBTime2.Text;
+
+            List<VisitorEmployeeView> visitorEmployeeViewList = new List<VisitorEmployeeView>();
+            visitorEmployeeViewList = BLT.searchVisitorByDate(time1, time2);
+
+            if (visitorEmployeeViewList != null)
+            {
+                if (visitorEmployeeViewList.Count != 0)
+                {
+                    AlertVisitorSearch.Visibility = Visibility.Collapsed;
+
+                    ReceptionistVisitorDG.ItemsSource = visitorEmployeeViewList;
+                    ReceptionistTablePanel.Visibility = Visibility.Visible;
+                    ReceptionistVisitorDG.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    AlertVisitorSearch.Text = "No Results Found";
+                    AlertVisitorSearch.Visibility = Visibility.Visible;
+                    ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                    ReceptionistVisitorDG.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                AlertVisitorSearch.Text = "Connection Error! Please Try Again Later";
+                AlertVisitorSearch.Visibility = Visibility.Visible;
+                ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                ReceptionistVisitorDG.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ReceptionistSeeMoreInfo(object sender, RoutedEventArgs ex)
+        {
+            string objString = ex.Source.ToString();
+            string[] portion = objString.Split(' ');
+            Visitor visitor = new Visitor();
+            visitor.ID = Int32.Parse(portion[1]);
+            visitor = BLT.getAllInfo(visitor.ID);
+
+            if(visitor != null)
+            {
+                string employeeName = BLT.getEmployeeName(visitor.EmployeeID);
+
+                if(!employeeName.Equals("null"))
+                {
+                    RFITbx1.Text = visitor.ID.ToString();
+                    RFITbx2.Text = visitor.Name;
+                    RFITbx3.Text = visitor.Gender;
+                    RFITbx4.Text = employeeName;
+                    RFITbx5.Text = visitor.Relationship;
+                    RFITbx6.Text = visitor.Purpose;
+                    RFITbx7.Text = visitor.Occupation;
+                    RFITbx8.Text = visitor.OfficeName;
+                    RFITbx9.Text = visitor.EmailID;
+                    RFITbx10.Text = visitor.ContactNumber.ToString();
+                    RFITbx11.Text = visitor.VisitingDate;
+                    RFITbx12.Text = visitor.VisitingTime;
+                    ReceptionistVisitorInfoPanel.Visibility = Visibility.Visible;
+                    AlertReceptionistTablePanel.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    AlertReceptionistTablePanel.Text = "Connection Error! Please Try Again Later";
+                    AlertReceptionistTablePanel.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                AlertReceptionistTablePanel.Text = "Connection Error! Please Try Again Later";
+                AlertReceptionistTablePanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Button_Back_ReceptionistTablePanel(object sender, RoutedEventArgs ex)
+        {
+            ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Back_ReceptionistVisitorInfoPanel(object sender, RoutedEventArgs ex)
+        {
+            ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+        }
+
         // #########################################################################################
 
 
@@ -48,30 +182,45 @@ namespace Reception_Management_System
 
         private void search_Click(object sender, RoutedEventArgs e)
         {
+            // PANELS FOR MENU
             SearchvisitorPanel.Visibility = Visibility.Visible;
             FormPanel.Visibility = Visibility.Collapsed;
-            ShowInfoPanel.Visibility = Visibility.Collapsed;
             EmployeePanel.Visibility = Visibility.Collapsed;
+
+            // PANELS FOR RESULT OR OUTPUT
+            ShowInfoPanel.Visibility = Visibility.Collapsed;
+            ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+            ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
         }
 
 
 
         private void form_Click(object sender, RoutedEventArgs e)
         {
+            // PANELS FOR MENU
             FormPanel.Visibility = Visibility.Visible;
             SearchvisitorPanel.Visibility = Visibility.Collapsed;
-            ShowInfoPanel.Visibility = Visibility.Collapsed;
             EmployeePanel.Visibility = Visibility.Collapsed;
+
+            // PANELS FOR RESULT OR OUTPUT
+            ShowInfoPanel.Visibility = Visibility.Collapsed;
+            ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+            ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
         }
 
 
 
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
+            // PANELS FOR MENU
             EmployeePanel.Visibility = Visibility.Visible;
             FormPanel.Visibility = Visibility.Collapsed;
             SearchvisitorPanel.Visibility = Visibility.Collapsed;
+
+            // PANELS FOR RESULT OR OUTPUT
             ShowInfoPanel.Visibility = Visibility.Collapsed;
+            ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+            ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
         }
 
 
@@ -110,14 +259,17 @@ namespace Reception_Management_System
                     {
                         name.Text = "Name :  " + fm.getName();
                         Gender.Text = "Gender :  " + fm.getGender();
-                        Meeting.Text = "Meeting With :  " + fm.getMeeting();
+
+                        // EXPLICITLY DISPLAYING THE EMPLOYEE NAME FROM EMPLOYEE ID
+                        int employeeID = Int32.Parse(fm.getMeeting());
+                        Meeting.Text = "Meeting With :  " + BLT.getEmployeeName(employeeID);
+
                         relationship.Text = "Relationship :  " + fm.getRelationship();
                         Purpose.Text = "Purpose :  " + fm.getPurpose();
                         Occupation.Text = "Occupation :  " + fm.getOccupation();
-                        contact.Text = "Contact Number :   " + fm.getContact();
-
-                        Company.Text = "Office Name: N/A";
-                        email.Text = "Email ID: N/A";
+                        Company.Text = "Office Name :  N/A";
+                        email.Text = "Email ID :  N/A";
+                        contact.Text = "Contact Number :  " + fm.getContact();
 
                         ShowInfoPanel.Visibility = Visibility.Visible;
                         FormPanel.Visibility = Visibility.Collapsed;
@@ -162,13 +314,17 @@ namespace Reception_Management_System
                     {
                         name.Text = "Name :  " + fm.getName();
                         Gender.Text = "Gender :  " + fm.getGender();
-                        Meeting.Text = "Meeting With :  " + fm.getMeeting();
+
+                        // EXPLICITLY DISPLAYING THE EMPLOYEE NAME FROM EMPLOYEE ID
+                        int employeeID = Int32.Parse(fm.getMeeting());
+                        Meeting.Text = "Meeting With :  " + BLT.getEmployeeName(employeeID);
+
                         relationship.Text = "Relationship :  " + fm.getRelationship();
                         Purpose.Text = "Purpose :  " + fm.getPurpose();
                         Occupation.Text = "Occupation :  " + fm.getOccupation();
                         Company.Text = "Office Name :  " + fm.getCompany_name();
                         email.Text = "Email Id :  " + fm.getEmail();
-                        contact.Text = "Contact Number :   " + fm.getContact();
+                        contact.Text = "Contact Number :  " + fm.getContact();
 
                         ShowInfoPanel.Visibility = Visibility.Visible;
                         FormPanel.Visibility = Visibility.Collapsed;
@@ -262,11 +418,14 @@ namespace Reception_Management_System
 
             String date = dt.ToString("yyyy-MM-dd");
             String time = dt.ToString("yyyy-MM-dd HH:mm:ss");
-            dates.Text = "Visiting Date : " + date;
-            times.Text = "Visiting Time : " + time;
 
             fm.date = date;
             fm.time = time;
+
+
+            // FOR DISPLAYING DATE AND TIME IN THE SHOWINFOPANEL
+            dates.Text = "Visiting Date : " + date;
+            times.Text = "Visiting Time : " + time;
         }
 
 
