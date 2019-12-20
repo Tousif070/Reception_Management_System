@@ -61,7 +61,7 @@
 
             <StackPanel>
                 <RadioButton Padding="2" IsChecked="True" Margin="270 -30 350 0" Content="Professional" FontSize="20" FontFamily="Helvetica" Name="professionalRelationship" Click="txtR_Click" />
-                <RadioButton Padding="2"  Margin="450 -30 300 0" Content="Family" FontSize="20" FontFamily="Helvetica" Name="familyRelationship" Click="txtR1_Click" />
+                <RadioButton Padding="2"  Margin="450 -30 300 0" Content="Friend/Family" FontSize="20" FontFamily="Helvetica" Name="familyRelationship" Click="txtR1_Click" />
             </StackPanel>
 
             <Label Margin="60,30,0,0" Content="Purpose"   FontSize="20" FontFamily="Helvetica" Target="{Binding ElementName=txtOc}" />

@@ -323,7 +323,7 @@ namespace Reception_Management_System
                         Purpose.Text = "Purpose :  " + fm.getPurpose();
                         Occupation.Text = "Occupation :  " + fm.getOccupation();
                         Company.Text = "Office Name :  " + fm.getCompany_name();
-                        email.Text = "Email Id :  " + fm.getEmail();
+                        email.Text = "Email ID :  " + fm.getEmail();
                         contact.Text = "Contact Number :  " + fm.getContact();
 
                         ShowInfoPanel.Visibility = Visibility.Visible;
@@ -395,7 +395,7 @@ namespace Reception_Management_System
             }
             else if (familyRelationship.IsChecked == true)
             {
-                fm.setRelationship("Family");
+                fm.setRelationship("Friend/Family");
             }
 
             fm.setPurpose(txtpurpose.Text);
