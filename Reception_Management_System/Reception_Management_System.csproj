@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BL_Tables.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Visitor.cs" />
     <Compile Include="VisitorEmployeeView.cs" />
     <Page Include="Dashboard_Receptionist.xaml">

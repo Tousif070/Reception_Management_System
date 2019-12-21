@@ -149,6 +149,66 @@ namespace Reception_Management_System
             }
         }
 
+        public List<Employee> searchEmployeeName(string name)
+        {
+            List<Employee> employeeList = new List<Employee>();
+            DataAccessLayer.Instance.createDatabaseConnection();
+            string query = "SELECT id, name, gender, designation FROM employee WHERE name REGEXP '^" + name + "';";
+
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DataAccessLayer.Instance.Connection))
+                {
+                    MySqlDataReader dataReader = mySqlCommand.ExecuteReader();
+                    while(dataReader.Read())
+                    {
+                        Employee employee = new Employee();
+                        employee.ID = dataReader.GetInt32(0);
+                        employee.Name = dataReader.GetString(1);
+                        employee.Gender = dataReader.GetString(2);
+                        employee.Designation = dataReader.GetString(3);
+                        employeeList.Add(employee);
+                    }
+                    return employeeList;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.ToString() + " SearchEmployeeName Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public List<Employee> displayAllEmployees()
+        {
+            List<Employee> employeeList = new List<Employee>();
+            DataAccessLayer.Instance.createDatabaseConnection();
+            string query = "SELECT id, name, gender, designation FROM employee";
+
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DataAccessLayer.Instance.Connection))
+                {
+                    MySqlDataReader dataReader = mySqlCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Employee employee = new Employee();
+                        employee.ID = dataReader.GetInt32(0);
+                        employee.Name = dataReader.GetString(1);
+                        employee.Gender = dataReader.GetString(2);
+                        employee.Designation = dataReader.GetString(3);
+                        employeeList.Add(employee);
+                    }
+                    return employeeList;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.ToString() + " SearchEmployeeName Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
 
     }
 }

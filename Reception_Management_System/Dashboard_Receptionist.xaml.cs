@@ -21,11 +21,16 @@ namespace Reception_Management_System
     {
         private BL_VisitorForm fm = new BL_VisitorForm();
         private BL_Tables BLT = new BL_Tables();
+        private DateTime DT = DateTime.Now;
         private MainWindow MainWindow = null;
 
         public Dashboard_Receptionist()
         {
             InitializeComponent();
+
+            CBYear.Text = DT.Year.ToString();
+            CBMonth.Text = DT.Month.ToString();
+            CBDate.Text = DT.Day.ToString();
         }
 
         // #########################################################################################
@@ -158,14 +163,80 @@ namespace Reception_Management_System
             }
         }
 
+        // BACK BUTTON FOR TABLE PANEL
         private void Button_Back_ReceptionistTablePanel(object sender, RoutedEventArgs ex)
         {
             ReceptionistTablePanel.Visibility = Visibility.Collapsed;
         }
 
+        // BACK BUTTON FOR VISITOR'S ALL INFO PANEL
         private void Button_Back_ReceptionistVisitorInfoPanel(object sender, RoutedEventArgs ex)
         {
             ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_SearchEmployee(object sender, RoutedEventArgs ex)
+        {
+            List<Employee> employeeList = new List<Employee>();
+            Employee employee = new Employee();
+            employee.Name = TbxEmployeeSearch.Text;
+            
+            if(!employee.Name.Equals(""))
+            {
+                employeeList = BLT.searchEmployeeName(employee.Name);
+
+                if (employeeList != null)
+                {
+                    if(employeeList.Count != 0)
+                    {
+                        AlertEmployeeSearch.Text = "Results Found";
+                        AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(0, 153, 0));
+                        AlertEmployeeSearch.Visibility = Visibility.Visible;
+                        ReceptionistEmployeeDG.ItemsSource = employeeList;
+                        ReceptionistEmployeeDG.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        AlertEmployeeSearch.Text = "No Result Found";
+                        AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(211, 47, 47));
+                        AlertEmployeeSearch.Visibility = Visibility.Visible;
+                        ReceptionistEmployeeDG.Visibility = Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    AlertEmployeeSearch.Text = "Connection Error! Please Try Again Later";
+                    AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(211, 47, 47));
+                    AlertEmployeeSearch.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                AlertEmployeeSearch.Text = "The Search Field Is Empty";
+                AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(211, 47, 47));
+                AlertEmployeeSearch.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void InsertEmployeeIDInVisitorForm(object sender, RoutedEventArgs ex)
+        {
+            string objString = ex.Source.ToString();
+            string[] portion = objString.Split(' ');
+            txtMeetingwith.Text = portion[1];
+        }
+
+        private void Button_ShowAllEmployees(object sender, RoutedEventArgs ex)
+        {
+            List<Employee> employeeList = new List<Employee>();
+            employeeList = BLT.displayAllEmployees();
+            ReceptionistEmployeeDG.ItemsSource = employeeList;
+            ReceptionistEmployeeDG.Visibility = Visibility.Visible;
+
+            AlertEmployeeSearch.Text = "Results Found";
+            AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(0, 153, 0));
+            AlertEmployeeSearch.Visibility = Visibility.Visible;
+
+            TbxEmployeeSearch.Text = "";
         }
 
         // #########################################################################################
@@ -180,6 +251,7 @@ namespace Reception_Management_System
 
 
 
+        // MENU BUTTON
         private void search_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
@@ -191,10 +263,16 @@ namespace Reception_Management_System
             ShowInfoPanel.Visibility = Visibility.Collapsed;
             ReceptionistTablePanel.Visibility = Visibility.Collapsed;
             ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+
+            // ALERT MESSAGES
+            AlertVisitorSearch.Visibility = Visibility.Collapsed;
+            AlertEmployeeSearch.Visibility = Visibility.Collapsed;
+            FormAlert.Visibility = Visibility.Collapsed;
         }
 
 
 
+        // MENU BUTTON
         private void form_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
@@ -206,10 +284,16 @@ namespace Reception_Management_System
             ShowInfoPanel.Visibility = Visibility.Collapsed;
             ReceptionistTablePanel.Visibility = Visibility.Collapsed;
             ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+
+            // ALERT MESSAGES
+            AlertVisitorSearch.Visibility = Visibility.Collapsed;
+            AlertEmployeeSearch.Visibility = Visibility.Collapsed;
+            FormAlert.Visibility = Visibility.Collapsed;
         }
 
 
 
+        // MENU BUTTON
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
@@ -221,6 +305,11 @@ namespace Reception_Management_System
             ShowInfoPanel.Visibility = Visibility.Collapsed;
             ReceptionistTablePanel.Visibility = Visibility.Collapsed;
             ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+
+            // ALERT MESSAGES
+            AlertVisitorSearch.Visibility = Visibility.Collapsed;
+            AlertEmployeeSearch.Visibility = Visibility.Collapsed;
+            FormAlert.Visibility = Visibility.Collapsed;
         }
 
 
@@ -283,12 +372,10 @@ namespace Reception_Management_System
                         txtMeetingwith.Text = "";
                         txtEmailid.Text = "";
                         txtofficename.Text = "";
-
-                        FormAlert.Visibility = Visibility.Collapsed;
                     }
                     else if(output.Equals("exception"))
                     {
-                        FormAlert.Text = "Error! Please Try Again Later";
+                        FormAlert.Text = "Connection Error! Please Try Again Later";
                         FormAlert.Visibility = Visibility.Visible;
                     }
 
@@ -338,12 +425,10 @@ namespace Reception_Management_System
                         txtEmailid.Text = "";
                         txtofficename.Text = "";
                         txtMeetingwith.Text = "";
-
-                        FormAlert.Visibility = Visibility.Collapsed;
                     }
                     else if(output.Equals("exception"))
                     {
-                        FormAlert.Text = "Error! Please Try Again Later";
+                        FormAlert.Text = "Connection Error! Please Try Again Later";
                         FormAlert.Visibility = Visibility.Visible;
                     }
                     

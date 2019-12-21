@@ -48,7 +48,7 @@
         <StackPanel x:Name="FormPanel" Visibility="Visible" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
             <TextBlock Text="Visitor's Form" Margin="0,0,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
-            <TextBlock x:Name="FormAlert" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="20" FontFamily="Helvetica" Foreground="Red" Visibility="Collapsed" />
+            <TextBlock x:Name="FormAlert" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="20" FontFamily="Helvetica" Foreground="Crimson" Visibility="Collapsed" />
             <Label  Margin="60,20,0,0" Content="Name" FontSize="20" FontFamily="Helvetica" />
             <TextBox  Padding="2" Margin="270,-30,300,0"  Name="txtName" FontSize="20" FontFamily="Helvetica" />
 
@@ -56,7 +56,7 @@
             <RadioButton  Padding="2" IsChecked="True" Content="Male" Margin="270 -30 300 0" FontSize="20" FontFamily="Helvetica" Name="txtgender"/>
             <RadioButton  Padding="2" Content="Female" Margin="400 -30 300 0" FontSize="20" FontFamily="Helvetica" Name="txtgender1"/>
             <Label Margin="60,25,0,0" Content="Meeting With(Employee Id)"   FontSize="20" FontFamily="Helvetica" Target="{Binding ElementName=txtMw}" />
-            <TextBox Padding="2"  Margin="350 -30 300 0" Name="txtMeetingwith" FontSize="20" FontFamily="Helvetica"  />
+            <TextBox IsReadOnly="true" Padding="2"  Margin="350 -30 300 0" Name="txtMeetingwith" FontSize="20" FontFamily="Helvetica"  />
             <Label Margin="60,25,0,0" Content="Relationship"   FontSize="20" FontFamily="Helvetica" Target="{Binding ElementName=txtR}" />
 
             <StackPanel>
@@ -90,11 +90,11 @@
 
         <StackPanel x:Name="ShowInfoPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" Background="#AADFFF">
 
-            <TextBlock x:Name="Heading" Margin="0 20 0 0" HorizontalAlignment="Center" Text="Data Recorded Successfully" FontSize="35" FontFamily="Canadara" FontWeight="SemiBold" Foreground="#1EAB08"/>
+            <TextBlock x:Name="Heading" Margin="0 20 0 0" HorizontalAlignment="Center" Text="Data Recorded Successfully" FontSize="30" FontFamily="Helvetica" Foreground="#1FA90A"/>
 
             <TextBlock   x:Name="name"  FontSize="20" Margin="10 10 0 0"  FontFamily="Helvetica" />
             <TextBlock   x:Name="Gender" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
-            <TextBlock   x:Name="Meeting" Margin="10 10 0 0" FontSize="20" FontFamily="CHelvetica"/>
+            <TextBlock   x:Name="Meeting" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica"/>
             <TextBlock   x:Name="relationship" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
             <TextBlock   x:Name="Purpose" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica"/>
             <TextBlock   x:Name="Occupation" Margin="10 10 0 0" FontSize="20" FontFamily="Helvetica" />
@@ -114,7 +114,7 @@
 
             <TextBlock Text="Search Visitors" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
 
-            <TextBlock x:Name="AlertVisitorSearch" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="24" FontFamily="Helvetica" Foreground="Crimson" Visibility="Collapsed" />
+            <TextBlock x:Name="AlertVisitorSearch" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontFamily="Helvetica" Foreground="Crimson" Visibility="Collapsed" />
 
             <WrapPanel Margin="40,30,0,0">
                 <TextBlock Text="Visitor Name:" Margin="50,0,0,0" FontSize="24" FontFamily="Helvetica" />
@@ -128,7 +128,7 @@
             <WrapPanel Margin="90,100,0,0">
                 <TextBlock Text="Date: " Margin="0,0,10,0" FontSize="24" FontFamily="Helvetica" />
                 <ComboBox x:Name="CBDate" FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="01" />
                     <ComboBoxItem Content="02" />
                     <ComboBoxItem Content="03" />
                     <ComboBoxItem Content="04" />
@@ -161,7 +161,7 @@
                     <ComboBoxItem Content="31" />
                 </ComboBox>
                 <ComboBox x:Name="CBMonth" FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="01" />
+                    <ComboBoxItem Content="01" />
                     <ComboBoxItem Content="02" />
                     <ComboBoxItem Content="03" />
                     <ComboBoxItem Content="04" />
@@ -175,7 +175,7 @@
                     <ComboBoxItem Content="12" />
                 </ComboBox>
                 <ComboBox x:Name="CBYear" FontSize="24" FontFamily="Helvetica">
-                    <ComboBoxItem IsSelected="True" Content="2019" />
+                    <ComboBoxItem Content="2019" />
                     <ComboBoxItem Content="2020" />
                 </ComboBox>
 
@@ -342,14 +342,35 @@
 
             <TextBlock Text="Search Employee" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="35" FontWeight="SemiBold" FontFamily="Helvetica"/>
 
-            <WrapPanel Margin="30,30,0,0">
-                <TextBlock Text="Employee Name:" Margin="50,0,0,0" FontSize="24" FontFamily="Helvetica" />
-                <TextBox Width="500" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" />
+            <TextBlock x:Name="AlertEmployeeSearch" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontFamily="Helvetica" Visibility="Collapsed" />
 
-                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica">
+            <WrapPanel Margin="15,30,0,0">
+                <TextBlock Text="Employee Name:" Margin="50,0,0,0" FontSize="24" FontFamily="Helvetica" />
+                <TextBox x:Name="TbxEmployeeSearch" Width="500" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" />
+
+                <Button Height="35" Width="35" Margin="20,0,0,0" FontSize="24" FontFamily="Helvetica" Click="Button_SearchEmployee">
                     <Image Source="D:\C#\Reception_Management_System\Images\mag1.png" Height="35" Width="35" />
                 </Button>
+
+                <Button Content="Show All Employees" Height="27" Width="132" Margin="20,0,0,0" FontSize="14" FontFamily="helvetica" Background="#E6E6FA" Click="Button_ShowAllEmployees" />
             </WrapPanel>
+
+            <DataGrid x:Name="ReceptionistEmployeeDG" IsReadOnly="True" AutoGenerateColumns="False" Width="400" Margin="0,30,0,0" FontSize="16" FontFamily="helvetica" Visibility="Collapsed">
+                <DataGrid.Columns>
+                    
+                    <DataGridTemplateColumn Header="ID">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding ID}" Height="30" Width="40" Click="InsertEmployeeIDInVisitorForm" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" />
+                    <DataGridTextColumn Header="Designation" Binding="{Binding Designation}" />
+                </DataGrid.Columns>
+            </DataGrid>
 
         </StackPanel>
 

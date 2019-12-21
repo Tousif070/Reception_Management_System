@@ -57,7 +57,7 @@ namespace Reception_Management_System
                 catch (Exception ex)
                 {
                     connection = null;
-                    MessageBox.Show(ex.Message, this.ToString() + " Create Database Connection Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, this.ToString() + " CreateDatabaseConnection Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
