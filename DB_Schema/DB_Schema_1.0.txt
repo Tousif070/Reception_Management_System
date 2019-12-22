@@ -1,0 +1,64 @@
+///////////////////// DDL Queries //////////////////////////////
+//////////////////// Database Creation & Table Creation //////////////////////////
+
+1. CREATE DATABASE reception_management_system_database;
+
+2. CREATE TABLE IF NOT EXISTS employee(
+	  id int NOT NULL AUTO_INCREMENT,
+   	  name varchar(100) NOT NULL,
+  	  gender varchar(100) NOT NULL,
+  	  designation varchar(100) NOT NULL,
+  	  address varchar(100) NOT NULL,
+  	  email_id varchar(100) NOT NULL,
+  	  contact_number int(11) NOT NULL,
+  	  salary int(6) NOT NULL,
+  	  PRIMARY KEY (id)
+	  );
+
+3. CREATE TABLE IF NOT EXISTS visitor(
+   	  id int NOT NULL AUTO_INCREMENT,
+  	  name varchar(100) NOT NULL,
+  	  gender varchar(100) NOT NULL,
+  	  employee_id int NOT NULL,
+  	  relationship varchar(100) NOT NULL,
+  	  purpose varchar(500) NOT NULL,
+   	  occupation varchar(100) NOT NULL,
+  	  office_name varchar(100),
+  	  email_id varchar(100),
+   	  contact_number int(11) NOT NULL,
+  	  visiting_date date NOT NULL,
+  	  visiting_time datetime NOT NULL,
+  	  PRIMARY KEY (id),
+  	  FOREIGN key (employee_id) REFERENCES employee (id)
+  	  );
+
+4. CREATE TABLE IF NOT EXISTS login(
+    	  id int NOT NULL AUTO_INCREMENT,
+  	  username varchar(100) NOT NULL,
+  	  employee_id int NOT NULL,
+  	  password varchar(100) NOT NULL,
+  	  PRIMARY KEY (id),
+  	  FOREIGN KEY (employee_id) REFERENCES employee (id)
+   	  );
+
+////////////////////// Table Alterations ////////////////////////////
+
+1. ALTER TABLE employee
+   ADD UNIQUE (contact_number);
+
+2. ALTER TABLE login
+   ADD UNIQUE (username);
+
+/////////////////////// Database Views //////////////////////////
+
+1. CREATE VIEW loginview AS
+   SELECT login.id, employee.id AS 'employee_id', login.username, login.password, employee.designation
+   FROM login
+   JOIN employee
+   ON login.employee_id = employee.id
+
+2. CREATE VIEW visitoremployeeview AS
+   SELECT visitor.visiting_time, visitor.id AS 'visitor_id', visitor.name AS 'visitor_name', employee.id AS 'employee_id', employee.name AS 'employee_name', visitor.relationship, visitor.purpose
+   FROM visitor
+   JOIN employee
+   ON visitor.employee_id = employee.id
