@@ -46,7 +46,10 @@
 1. ALTER TABLE employee
    ADD UNIQUE (contact_number);
 
-2. ALTER TABLE login
+2. ALTER TABLE employee
+   ADD UNIQUE (email_id);
+
+3. ALTER TABLE login
    ADD UNIQUE (username);
 
 /////////////////////// Database Views //////////////////////////
