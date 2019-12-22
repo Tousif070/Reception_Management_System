@@ -52,7 +52,7 @@
 /////////////////////// Database Views //////////////////////////
 
 1. CREATE VIEW loginview AS
-   SELECT login.id, login.username, login.password, employee.designation
+   SELECT login.id, employee.id AS 'employee_id', login.username, login.password, employee.designation
    FROM login
    JOIN employee
    ON login.employee_id = employee.id
