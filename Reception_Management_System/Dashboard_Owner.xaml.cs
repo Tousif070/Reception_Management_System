@@ -339,7 +339,7 @@ namespace Reception_Management_System
                     AlertProfilePanel.Visibility = Visibility.Visible;
                 }
             }
-            else if (!BLP.Username.Equals(username) && !BLP.Password.Equals(password))
+            else if (!(BLP.Username.Equals(username) && BLP.Password.Equals(password)))
             {
                 string msg1 = BLP.CheckUsername(loginID);
 

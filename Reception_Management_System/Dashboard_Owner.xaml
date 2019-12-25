@@ -31,7 +31,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Background="#87CEFA" Grid.ColumnSpan="1">
             <Button x:Name="VISITOR" Background="#E0FFFF" FontFamily="Helvetica" FontWeight="SemiBold" Height="40" FontSize="24" Content="Search Visitors" Click="SEARCHVISITOR_Click" />
             <Button x:Name="PROFILE" Background="#E0FFFF" FontFamily="Helvetica" Height="40" FontWeight="SemiBold" FontSize="24" Content="User Profile" Click="PROFILE_Click"/>
-            <Button x:Name="Logout" FontSize="24" Background="#DC143C" Content="LOGOUT" FontFamily="Helvetica" FontWeight="SemiBold" Foreground="White" Height="40" Click="logout_Click"/>
+            <Button x:Name="Logout" Margin="0,570,0,0" FontSize="24" Background="#DC143C" Content="LOGOUT" FontFamily="Helvetica" FontWeight="SemiBold" Foreground="White" Height="40" Click="logout_Click"/>
 
         </StackPanel>
         
