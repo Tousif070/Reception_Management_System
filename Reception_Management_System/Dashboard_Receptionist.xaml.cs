@@ -78,6 +78,7 @@ namespace Reception_Management_System
                     if(visitorEmployeeViewList.Count != 0)
                     {
                         AlertVisitorSearch.Visibility = Visibility.Collapsed;
+                        TbxVisitorSearch.Text = "";
 
                         ReceptionistVisitorDG.ItemsSource = visitorEmployeeViewList;
                         ReceptionistTablePanel.Visibility = Visibility.Visible;

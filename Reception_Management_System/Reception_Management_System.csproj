@@ -78,10 +78,17 @@
     <Compile Include="BL_Login.cs" />
     <Compile Include="BL_Profile.cs" />
     <Compile Include="BL_Tables.cs" />
+    <Compile Include="Dashboard_Owner.xaml.cs">
+      <DependentUpon>Dashboard_Owner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="LoginView.cs" />
     <Compile Include="Visitor.cs" />
     <Compile Include="VisitorEmployeeView.cs" />
+    <Page Include="Dashboard_Owner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboard_Receptionist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

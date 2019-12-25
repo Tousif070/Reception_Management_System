@@ -210,5 +210,47 @@ namespace Reception_Management_System
         }
 
 
+
+        public int deleteAllInfo(int id)
+        {
+            DataAccessLayer.Instance.createDatabaseConnection();
+            string query = "DELETE FROM visitor WHERE id=" + id + ";";
+
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DataAccessLayer.Instance.Connection))
+                {
+                    return mySqlCommand.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.ToString() + " DeleteAllInfo Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 0;
+            }
+        }
+
+
+
+        public int modifyVisitorInfo(int id, string purpose, string occupation, string officeName)
+        {
+            DataAccessLayer.Instance.createDatabaseConnection();
+            string query = "UPDATE visitor SET purpose='" + purpose + "', occupation='" + occupation + "', office_name='" + officeName + "' WHERE id=" + id + ";";
+
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DataAccessLayer.Instance.Connection))
+                {
+                    return mySqlCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.ToString() + " ModifyVisitorInfo Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 0;
+            }
+        }
+
+
     }
 }

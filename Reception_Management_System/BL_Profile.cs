@@ -104,7 +104,7 @@ namespace Reception_Management_System
         public String UpdateProfile(int id)
         {
             DataAccessLayer.Instance.createDatabaseConnection();
-            String query = "UPDATE LOGIN SET username = '" + username + "', password = '" + password + "' WHERE id = " + id + ";";
+            String query = "UPDATE login SET username = '" + username + "', password = '" + password + "' WHERE id = " + id + ";";
 
             try
             {

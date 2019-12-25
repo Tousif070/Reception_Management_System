@@ -25,8 +25,6 @@ namespace Reception_Management_System
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
         private void Button_ExitApp(object sender, RoutedEventArgs ex)
@@ -100,19 +98,14 @@ namespace Reception_Management_System
             }
             else if(loginView.Designation.Equals("Owner/Boss"))
             {
+                Dashboard_Owner owner = new Dashboard_Owner();
+                owner.setMainWindow(this);
+                owner.setUserSpecificInformation(loginView.LoginID, loginView.EmployeeID, loginView.Username, loginView.Password, loginView.Designation);
 
+                owner.Show();
+                this.Hide();
             }
         }
-        
-
-        /*private void Testing_Receptionist_Dashboard(object sender, RoutedEventArgs ex)
-        {
-            Dashboard_Receptionist receptionist = new Dashboard_Receptionist();
-            receptionist.Show();
-            receptionist.setMainWindow(this);
-            this.Hide();
-        }
-        */
 
     }
 }
