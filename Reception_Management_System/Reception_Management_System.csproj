@@ -75,8 +75,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL_Login.cs" />
+    <Compile Include="BL_Profile.cs" />
     <Compile Include="BL_Tables.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="LoginView.cs" />
     <Compile Include="Visitor.cs" />
     <Compile Include="VisitorEmployeeView.cs" />
     <Page Include="Dashboard_Receptionist.xaml">

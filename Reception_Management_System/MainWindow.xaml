@@ -6,13 +6,33 @@
         xmlns:local="clr-namespace:Reception_Management_System"
         mc:Ignorable="d"
         Title="MainWindow" Height="830" Width="1300" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Background="#AADFFF">
 
-        <StackPanel>
-            <TextBlock Text="Main Window" HorizontalAlignment="Center" Margin="0,100,0,0" FontSize="50" FontFamily="helvetica" />
-            <Button Content="Go To Receptionist Dashboard" Width="400" Margin="0,100,0,0" FontSize="24" FontFamily="helvetica" Click="Testing_Receptionist_Dashboard" />
-            <Button Content="Exit" Width="100" Margin="0,400,0,0" FontSize="24" FontFamily="helvetica" Click="Button_ExitApp" />
-        </StackPanel>
+
+        <Border BorderBrush="Moccasin" BorderThickness="0" HorizontalAlignment="Left" Height="470" Margin="380,150,0,0" VerticalAlignment="Top" Width="545" Background="#87CEFA" CornerRadius="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="25,25,0,0" TextWrapping="Wrap" Text="ABC Company" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Foreground="#FF252620" FontFamily="helvetica"/>
         
+        <Button Content="Login" Margin="340,0,0,0" Width="70" Height="35" FontSize="16" FontFamily="helvetica" Background="#4682B4" Foreground="White" Click="Button_Login" />
+
+        <Button Content="Reset" Margin="100,0,0,0" Width="70" Height="35" FontSize="16" FontFamily="helvetica" Background="#4682B4" Foreground="White" Click="Button_Reset" />
+
+        <PasswordBox x:Name="PbxPassword" PasswordChar="*" Margin="220,-140,0,0" Height="30" Width="200" FontSize="18" FontFamily="helvetica" FontWeight="Bold" />
+        
+        <TextBox x:Name="TbxUsername" Height="30" Margin="220,-250,0,0" Width="200" FontSize="18" FontFamily="helvetica" FontWeight="Bold" />
+        
+        <TextBlock HorizontalAlignment="center" Height="40" Margin="25,-420,0,0" Text="Login" FontSize="30" FontFamily="helvetica" FontWeight="Bold"/>
+
+        <TextBlock x:Name="AlertLogin" Height="30" Margin="50,-340,0,0" HorizontalAlignment="Center" FontSize="18" FontFamily="helvetica" Visibility="Hidden" Foreground="Crimson" />
+
+        <Image HorizontalAlignment="Left" Height="100" Margin="85,85,0,0" VerticalAlignment="Top" Width="100" Source="D:\C#\Reception_Management_System\Images\logo.jpg" RenderTransformOrigin="-0.148,0.602"/>
+        <Image HorizontalAlignment="Left" Height="30" Margin="505,255,0,0" VerticalAlignment="Top" Width="45" Source="D:\C#\Reception_Management_System\Images\user.png" RenderTransformOrigin="0.116,0.347"/>
+        <Image HorizontalAlignment="Left" Height="50" Margin="505,305,0,0" VerticalAlignment="Top" Width="40" Source="D:\C#\Reception_Management_System\Images\password.png" RenderTransformOrigin="1.252,0.455"/>
+
+        <TextBlock HorizontalAlignment="Center" Margin="-100,260,0,0" Text="Username:" FontSize="18" FontFamily="helvetica" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Center" Margin="-105,315,0,0" Text="Passward:" FontSize="18" FontFamily="helvetica" FontWeight="Bold"/>
+
+        <Button Content="Exit" Margin="440,300,0,0" Width="60" Height="35" FontSize="16" FontFamily="helvetica" Background="Crimson" Foreground="White" Click="Button_ExitApp" />
+
+
     </Grid>
 </Window>

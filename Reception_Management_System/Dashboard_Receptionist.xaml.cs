@@ -21,8 +21,17 @@ namespace Reception_Management_System
     {
         private BL_VisitorForm fm = new BL_VisitorForm();
         private BL_Tables BLT = new BL_Tables();
+        private BL_Profile BLP = new BL_Profile();
+
         private DateTime DT = DateTime.Now;
         private MainWindow MainWindow = null;
+
+        // VARIABLES NEEDED TO STORE USER SPECIFIC INFORMATION DURING LOGIN
+        private int loginID = 0;
+        private int employeeID = 0;
+        private string username = "";
+        private string password = "";
+        private string designation = "";
 
         public Dashboard_Receptionist()
         {
@@ -38,6 +47,20 @@ namespace Reception_Management_System
         public void setMainWindow(MainWindow inputMainWindow)
         {
             MainWindow = inputMainWindow;
+        }
+
+        public void setUserSpecificInformation(int inputLoginID, int inputEmployeeID, string inputUsername, string inputPassword, string inputDesignation)
+        {
+            loginID = inputLoginID;
+            employeeID = inputEmployeeID;
+            username = inputUsername;
+            password = inputPassword;
+            designation = inputDesignation;
+
+            TbxProfileName_ISR.Text = BLT.getEmployeeName(employeeID);
+            TbxProfileDesignation_ISR.Text = designation;
+            TbxProfileUsername_ISR.Text = username;
+            TbxProfilePassword_ISR.Text = password;
         }
 
         private void Button_SearchByName(object sender, RoutedEventArgs ex)
@@ -229,14 +252,127 @@ namespace Reception_Management_System
         {
             List<Employee> employeeList = new List<Employee>();
             employeeList = BLT.displayAllEmployees();
-            ReceptionistEmployeeDG.ItemsSource = employeeList;
-            ReceptionistEmployeeDG.Visibility = Visibility.Visible;
 
-            AlertEmployeeSearch.Text = "Results Found";
-            AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(0, 153, 0));
-            AlertEmployeeSearch.Visibility = Visibility.Visible;
+            if(employeeList != null)
+            {
+                ReceptionistEmployeeDG.ItemsSource = employeeList;
+                ReceptionistEmployeeDG.Visibility = Visibility.Visible;
 
-            TbxEmployeeSearch.Text = "";
+                AlertEmployeeSearch.Text = "Results Found";
+                AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(0, 153, 0));
+                AlertEmployeeSearch.Visibility = Visibility.Visible;
+
+                TbxEmployeeSearch.Text = "";
+            }
+            else
+            {
+                AlertEmployeeSearch.Text = "Connection Error! Please Try Again Later";
+                AlertEmployeeSearch.Foreground = new SolidColorBrush(Color.FromRgb(211, 47, 47));
+                AlertEmployeeSearch.Visibility = Visibility.Visible;
+                ReceptionistEmployeeDG.Visibility = Visibility.Collapsed;
+
+                TbxEmployeeSearch.Text = "";
+            }
+        }
+
+        private void Button_ProfileUpdate(object sender, RoutedEventArgs ex)
+        {
+            BLP.Username = TbxUsername_Change.Text;
+            BLP.Password = TbxPassword_Change.Text;
+            BLP.RepeatPassword = TbxRepeatPassword_Change.Text;
+
+            if(BLP.CheckEmpty())
+            {
+                AlertProfilePanel.Text = "Fields Are Empty";
+                AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                AlertProfilePanel.Visibility = Visibility.Visible;
+            }
+            else if(!BLP.CheckPassword())
+            {
+                AlertProfilePanel.Text = "Passwords Do Not Match";
+                AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                AlertProfilePanel.Visibility = Visibility.Visible;
+            }
+            else if(BLP.Password.Length < 4)
+            {
+                AlertProfilePanel.Text = "Password Too Small! At Least 4 Characters Needed";
+                AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                AlertProfilePanel.Visibility = Visibility.Visible;
+            }
+            else if(BLP.Username.Equals(username) && !BLP.Password.Equals(password))
+            {
+                string msg = BLP.UpdateProfile(loginID);
+
+                if(msg.Equals("okay"))
+                {
+                    AlertProfilePanel.Text = "Updated";
+                    AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(20, 90, 50));
+                    AlertProfilePanel.Visibility = Visibility.Visible;
+
+                    password = BLP.Password;
+                    TbxProfilePassword_ISR.Text = password;
+
+                    TbxUsername_Change.Text = "";
+                    TbxPassword_Change.Text = "";
+                    TbxRepeatPassword_Change.Text = "";
+                }
+                else if(msg.Equals("null"))
+                {
+                    AlertProfilePanel.Text = "Connection Error! Please Try Again Later";
+                    AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                    AlertProfilePanel.Visibility = Visibility.Visible;
+                }
+            }
+            else if(!(BLP.Username.Equals(username) && BLP.Password.Equals(password)))
+            {
+                string msg1 = BLP.CheckUsername(loginID);
+
+                if(msg1.Equals("all clear"))
+                {
+                    string msg2 = BLP.UpdateProfile(loginID);
+
+                    if (msg2.Equals("okay"))
+                    {
+                        AlertProfilePanel.Text = "Updated";
+                        AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(20, 90, 50));
+                        AlertProfilePanel.Visibility = Visibility.Visible;
+
+                        username = BLP.Username;
+                        TbxProfileUsername_ISR.Text = username;
+
+                        password = BLP.Password;
+                        TbxProfilePassword_ISR.Text = password;
+
+                        TbxUsername_Change.Text = "";
+                        TbxPassword_Change.Text = "";
+                        TbxRepeatPassword_Change.Text = "";
+                    }
+                    else if (msg2.Equals("null"))
+                    {
+                        AlertProfilePanel.Text = "Connection Error! Please Try Again Later";
+                        AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                        AlertProfilePanel.Visibility = Visibility.Visible;
+                    }
+                }
+                else if(msg1.Equals("username exists"))
+                {
+                    AlertProfilePanel.Text = "Username Already Exists !";
+                    AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                    AlertProfilePanel.Visibility = Visibility.Visible;
+                }
+                else if(msg1.Equals("null"))
+                {
+                    AlertProfilePanel.Text = "Connection Error! Please Try Again Later";
+                    AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(183, 28, 28));
+                    AlertProfilePanel.Visibility = Visibility.Visible;
+                }
+            }
+            else if(BLP.Username.Equals(username) && BLP.Password.Equals(password))
+            {
+                AlertProfilePanel.Text = "No Changes Made";
+                AlertProfilePanel.Foreground = new SolidColorBrush(Color.FromRgb(20, 90, 50));
+                AlertProfilePanel.Visibility = Visibility.Visible;
+            }
         }
 
         // #########################################################################################
@@ -252,12 +388,13 @@ namespace Reception_Management_System
 
 
         // MENU BUTTON
-        private void search_Click(object sender, RoutedEventArgs e)
+        private void SearchVisitor_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
             SearchvisitorPanel.Visibility = Visibility.Visible;
             FormPanel.Visibility = Visibility.Collapsed;
             EmployeePanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
 
             // PANELS FOR RESULT OR OUTPUT
             ShowInfoPanel.Visibility = Visibility.Collapsed;
@@ -268,17 +405,19 @@ namespace Reception_Management_System
             AlertVisitorSearch.Visibility = Visibility.Collapsed;
             AlertEmployeeSearch.Visibility = Visibility.Collapsed;
             FormAlert.Visibility = Visibility.Collapsed;
+            AlertProfilePanel.Visibility = Visibility.Collapsed;
         }
 
 
 
         // MENU BUTTON
-        private void form_Click(object sender, RoutedEventArgs e)
+        private void VisitorForm_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
             FormPanel.Visibility = Visibility.Visible;
             SearchvisitorPanel.Visibility = Visibility.Collapsed;
             EmployeePanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
 
             // PANELS FOR RESULT OR OUTPUT
             ShowInfoPanel.Visibility = Visibility.Collapsed;
@@ -289,15 +428,40 @@ namespace Reception_Management_System
             AlertVisitorSearch.Visibility = Visibility.Collapsed;
             AlertEmployeeSearch.Visibility = Visibility.Collapsed;
             FormAlert.Visibility = Visibility.Collapsed;
+            AlertProfilePanel.Visibility = Visibility.Collapsed;
         }
 
 
 
         // MENU BUTTON
-        private void Employee_Click(object sender, RoutedEventArgs e)
+        private void SearchEmployee_Click(object sender, RoutedEventArgs e)
         {
             // PANELS FOR MENU
             EmployeePanel.Visibility = Visibility.Visible;
+            FormPanel.Visibility = Visibility.Collapsed;
+            SearchvisitorPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+
+            // PANELS FOR RESULT OR OUTPUT
+            ShowInfoPanel.Visibility = Visibility.Collapsed;
+            ReceptionistTablePanel.Visibility = Visibility.Collapsed;
+            ReceptionistVisitorInfoPanel.Visibility = Visibility.Collapsed;
+
+            // ALERT MESSAGES
+            AlertVisitorSearch.Visibility = Visibility.Collapsed;
+            AlertEmployeeSearch.Visibility = Visibility.Collapsed;
+            FormAlert.Visibility = Visibility.Collapsed;
+            AlertProfilePanel.Visibility = Visibility.Collapsed;
+        }
+
+
+
+        // MENU BUTTON
+        private void UserProfile_Click(object sender, RoutedEventArgs ex)
+        {
+            // PANELS FOR MENU
+            ProfilePanel.Visibility = Visibility.Visible;
+            EmployeePanel.Visibility = Visibility.Collapsed;
             FormPanel.Visibility = Visibility.Collapsed;
             SearchvisitorPanel.Visibility = Visibility.Collapsed;
 
@@ -310,6 +474,7 @@ namespace Reception_Management_System
             AlertVisitorSearch.Visibility = Visibility.Collapsed;
             AlertEmployeeSearch.Visibility = Visibility.Collapsed;
             FormAlert.Visibility = Visibility.Collapsed;
+            AlertProfilePanel.Visibility = Visibility.Collapsed;
         }
 
 
